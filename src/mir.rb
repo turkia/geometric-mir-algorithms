@@ -4,6 +4,14 @@
 require 'algorithms'
 
 # Pure Ruby implementations of advanced algorithms for musical information retrieval (MIR), i.e. melody searching. 
+# 
+# Algorithms P1, P2 and P3 are described in the following publication: 
+#
+# Ukkonen, Esko; Lemström, Kjell; Mäkinen, Veli:
+# Geometric algorithms for transposition invariant content-based music retrieval. 
+# in Proc. 4th International Conference on Music Information Retrieval, pp. 193-199, 2003.
+# https://tuhat.halvi.helsinki.fi/portal/services/downloadRegister/14287445/03ISMIR_ULM.pdf
+# 
 # Implementations follow pseudocode in the respective articles and were used in prototyping the C implementations.
 # Therefore their style differs from idiomatic Ruby. 
 #
