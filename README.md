@@ -33,6 +33,14 @@ pattern = [[0,72], [200,72], [400,62], [600,72]]
 puts MIR::p2(source, pattern)
 ```
 
+Algorithm P3 expects the source as an array containing points, whose first element is start time, second element is pitch, and third is duration. 
+
+```ruby
+source = [[0,65,200], [0,69,200], [0,72,200], [200,64,200], [200,67,200], [200,72,200], [400,62,200],[400,65,200],[600,60,200],[600,64,200],[600,72,200]]
+pattern = [[0,65,200], [0,69,200], [0,72,200], [200,64,200], [200,67,200], [200,72,200], [400,62,200],[400,65,200],[600,60,200],[600,64,200],[600,72,200]]
+puts MIR::p3(source, pattern)
+```
+
 Results are described in the article. 
 
 ShiftOrAnd algorithm expects source as chords, i.e. an array containing arrays, each of which represents a chord, i.e. the notes playing simultaneously. 
