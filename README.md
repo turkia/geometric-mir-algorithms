@@ -21,7 +21,7 @@ Algorithms P1 and P2 expect source and pattern to be an array containing points,
 By convention pitches are MIDI values. 
 
 ```ruby
-source = [[0,65], [0,69], [0,72], [200,64], [200,67], [200,72], [400,62],[400,65],[600,60],[600,64],[600,72],[99999,99999]]
+source = [[0,65], [0,69], [0,72], [200,64], [200,67], [200,72], [400,62],[400,65],[600,60],[600,64],[600,72]]
 pattern = [[0,72], [200,72], [400,62], [600,72]]
 puts MIR::p1(source,pattern).inspect
 ```

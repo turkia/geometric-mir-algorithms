@@ -15,21 +15,26 @@ require 'algorithms'
 # Implementations follow pseudocode in the respective articles and were used in prototyping the C implementations.
 # Therefore their style differs from idiomatic Ruby. 
 #
-# Copyright Mika Turkia 2002-2003.
+# Copyright Mika Turkia 2002-2012.
 class MIR
 
-	# Prototype of algorithm P1. End of source marked with [inf,inf] like in the article pseudocode.
-	# Copyright Mika Turkia, May 15th, 2003.
-	def self.p1(t, p)
+	INFINITY_POINT = [Float::INFINITY, Float::INFINITY]
+	MINUS_INFINITY_POINT = INFINITY_POINT.map { |i| -i }
 
-		f = [-99999, -99999]
+	# Algorithm P1. 
+	# Copyright Mika Turkia, May 15th, 2003 and and September 6th, 2012.
+	def self.p1(source, p)
+
+		# Following the article pseudocode the end of source is marked with [inf,inf]. 
+		t = source.push(INFINITY_POINT)
+
+		f = MINUS_INFINITY_POINT
 		c = 0
 		matches = []
 
 		# priority queue simulated with an array.
-		q = []
-		p.size.times do q.push([-99999,-99999]) end
-		q.push([99999,99999])
+		q = Array.new(p.size) { MINUS_INFINITY_POINT }
+		q.push(INFINITY_POINT)
 
 		for ti in 0..t.size - p.size - 1 do
 
@@ -40,7 +45,7 @@ class MIR
 			loop do
 				# start comparing from the second note of the pattern
 				pi += 1
-				break if pi==p.size
+				break if pi == p.size
 
 				# temporary index for traversing t
 				tti = ti + pi
@@ -63,12 +68,12 @@ class MIR
 	end
 
 
-	# Prototype of algorithm P2. Unlike in the article pseudocode, the end of source is not marked with [inf,inf]. 
-	# Copyright Mika Turkia, May 15th, 2003 and September 9th, 2012. 
+	# Algorithm P2. 
+	# Copyright Mika Turkia, May 15th, 2003 and September 5th, 2012. 
 	def self.p2(s, p)
 
-		# minus infinity
-		f = [-99999, -99999]
+		# Unlike in the article pseudocode, the end of source is not marked with [inf,inf]. 
+		f = MINUS_INFINITY_POINT
 		c = 0
 		matches = []
 
