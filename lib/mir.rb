@@ -146,3 +146,5 @@ class MIR
 		matches
 	end
 end
+
+require_relative 'p3'
