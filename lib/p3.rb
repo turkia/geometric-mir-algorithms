@@ -131,7 +131,7 @@ class MIR
 		end
 	end
 
-	# Algorithm P3.
+	# Algorithm P3, as described in Ukkonen et. al. 2003.
 	# Mika Turkia 2003.
 	def self.p3(t, p)
 
@@ -242,7 +242,8 @@ class MIR
 		{ :longest_common_duration => best, :matched_notes => (notes.map { |n| t[n] } if notes) }
 	end
 
-	# A prototype of algorithm P3, which ignores overlapping note segments by using counters.
+	# Algorithm P3. 
+	# An enhanced version that ignores overlapping note segments by using counters.
 	# Mika Turkia and Veli Makinen 2003.
 	def self.p3b(t, p)
 

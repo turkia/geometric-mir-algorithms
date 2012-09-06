@@ -12,8 +12,8 @@ require 'algorithms'
 # in Proc. 4th International Conference on Music Information Retrieval, pp. 193-199, 2003.
 # https://tuhat.halvi.helsinki.fi/portal/services/downloadRegister/14287445/03ISMIR_ULM.pdf
 # 
-# Implementations follow pseudocode in the respective articles and were used in prototyping the C implementations.
-# Therefore their style differs from idiomatic Ruby. 
+# Implementations follow the pseudocode in the article and were used in prototyping the C implementations.
+# Therefore their style differs somewhat from idiomatic Ruby. 
 #
 # Copyright Mika Turkia 2002-2012.
 class MIR
@@ -165,32 +165,6 @@ class MIR
 				f = fn
 				c = 1
 			end
-		end
-		matches
-	end
-
-
-	# Prototype of ShiftOrAnd algorithm. No transposition invariance, exact matches only.
-	# Copyright Mika Turkia 2002/2012.
-	def self.shiftorand(chords, pattern)
-
-		matches = []
-		m = nil
-		t = []
-		mask = e = 2 ** pattern.size - 1
-		tmppre = 2 ** 32 - 1
-
-		for i in 0..127 do t[i] = mask end
-
-		for i in 0...pattern.size do t[pattern[i]] -= 2 ** i end
-
-		for j in 0...chords.size do
-
-			tmp = tmppre
-			chords[j].each do |note| tmp &= t[note] end
-			e = ((e << 1) | tmp) & mask
-
-			matches << {:start => j - pattern.size + 1, :end => j} if (e[pattern.size - 1] == 0)
 		end
 		matches
 	end
