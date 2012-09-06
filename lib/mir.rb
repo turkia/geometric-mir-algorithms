@@ -21,11 +21,12 @@ class MIR
 	INFINITY_POINT = [Float::INFINITY, Float::INFINITY]
 	MINUS_INFINITY_POINT = INFINITY_POINT.map { |i| -i }
 
-	# Algorithm P1. 
+
+	# Algorithm P1 version 1. 
+	# Following the article pseudocode the end of source is marked with [inf,inf]. 
 	# Copyright Mika Turkia, May 15th, 2003 and and September 6th, 2012.
 	def self.p1(source, p)
 
-		# Following the article pseudocode the end of source is marked with [inf,inf]. 
 		t = source.push(INFINITY_POINT)
 
 		f = MINUS_INFINITY_POINT
@@ -63,6 +64,54 @@ class MIR
 			end
 
 			if pi == p.size then matches << [f[0], f[1]] end
+		end
+		matches
+	end
+
+
+	# Algorithm P1 version 2. 
+	# Unlike in the article pseudocode the end of source is not marked with [inf,inf]. 
+	# Copyright Mika Turkia, May 15th, 2003 and and September 6th, 2012.
+	def self.p1b(t, p)
+
+		f = MINUS_INFINITY_POINT
+		c = 0
+		matches = []
+
+		# priority queue simulated with an array.
+		q = Array.new(p.size) { MINUS_INFINITY_POINT }
+		q.push(INFINITY_POINT)
+		match = true
+
+		for ti in 0..t.size - p.size do
+
+			f[0] = t[ti][0] - p[0][0]
+			f[1] = t[ti][1] - p[0][1]
+			pi = 0
+			match = true
+
+			loop do
+				# start comparing from the second note of the pattern
+				pi += 1
+				break if pi == p.size
+
+				# temporary index for traversing t
+				tti = ti + pi
+
+				# q[pi] = max(q[pi], t[ti])
+				q[pi] = t[tti] if q[pi][0] < t[tti][0] or (q[pi][0] == t[tti][0] and q[pi][1] < t[tti][1])
+
+				# move q[pi] pointer (corresponding to p[pi]) on in the source until a match cannot be found
+				while ((q[pi][0] < p[pi][0] + f[0]) or ((q[pi][0] == p[pi][0] + f[0]) and (q[pi][1] < p[pi][1] + f[1]))) do 
+					tti += 1
+					if tti == t.size then match=false; break end
+					q[pi] = t[tti]
+				end
+
+				break if (q[pi][0] > p[pi][0] + f[0]) or ((q[pi][0] == p[pi][0] + f[0]) and (q[pi][1] > p[pi][1] + f[1]))
+			end
+
+			if pi == p.size and match then matches << [f[0], f[1]] end
 		end
 		matches
 	end
